@@ -7,18 +7,17 @@
 \bigskip \bigskip
 \end{center}
 
-{\bf Title of Thesis:} \parbox[t]{4.5in}{{Android Malware Detection \& Classification Using Machine Learning Techniques\\
-Satyajit Padalkar, MS Computer Science, 2014\\}}
+{\bf Title of Thesis:} \parbox[t]{4.5in}{{Semantic Representation of Log Files\\
+Piyush Nimbalkar, MS Computer Science, 2015\\}}
 \begin{singlespace}
-{\bf Thesis directed by:}{\hspace{2.5mm}} \parbox[t]{3in}{Dr. Anupam Joshi, Professor \\
-Department of Computer Science and \\ Electrical Engineering\\}
+{\bf Thesis Directed by:}{\hspace{2.5mm}} \parbox[t]{3in}{Dr. Anupam Joshi, Professor\\
+Department of Computer Science\\ 
+and Electrical Engineering\\}
 \end{singlespace}
 
-Android is popular mobile operating system and there are multiple marketplaces for android applications. Most of these market places allow applications to be signed using self-signed certificates. Due to this practice there exists little or very limited control over the kind of applications that are being distributed. Also advancement of android root kits is making it increasingly easier to repackage existing android applications with malicious code. Conventional signature based techniques fail to detect these malwares. So detection and classification of android malwares is a very difficult problem to solve.
+Log files comprise of different events happening in various applications, operating systems and even in network devices. Originally they were used to record information for diagnostic and debugging purposes. Nowadays, logs are also used to track events which can be used in auditing and forensics in case of malicious activities or systems attacks. Various softwares like intrusion detection systems, webservers, anti-virus and anti-malware systems, firewalls and network devices generate logs with useful information, that can be used to protect against such system attacks. Analyzing log files can help in proactively avoiding attacks against the systems. The challenging part is understanding log files from unknown devices and of unknown formats.
 
-We present a method to classify and detect such malwares by performing dynamic analysis of the system call sequences. Here we make use of machine learning techniques to build multiple models using distributions of syscalls as features. Using these models we predict whether given application is malicious or benign. Also we try to classify given application to specific known malware family. We also explore deeplearning methods such as stacked denoising autoencoder (SdA) algorithms and its effectiveness.
-
-We experimentally evaluate our methods using a real dataset of 600 malicious applications spread across 38 malware families along with 25 popular benign applications from various areas. We find that deeplearning algorithm (SdA) is most accurate in detecting a malware with lowest false positives while AdaBoost performs better in classifying a malware family.
+In this work we are addressing this particular problem. We propose a framework that takes any log file and automatically gives out a semantic interpretation as Linked Open Data in RDF and OWL formats. The framework splits the log files into columns using regular expression-based or dictionary-based classifiers. To classify the columns we use general purpose knowledge bases such as DBpedia and even domain specific ontologies like Cybersecurity and Intrusion detection ontologies[]. Using previous work on inferring semantics of table data[], we capture the relationships between the various columns in a log file. Converting large and verbose log files into such semantic representations will help in better search, integration and rich reasoning over the data.
 
 \par\vfil
 
