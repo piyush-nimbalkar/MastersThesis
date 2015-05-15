@@ -1,0 +1,113 @@
+\documentclass[12pt]{report}
+
+\usepackage{multirow}
+\usepackage{doublespace}
+\usepackage{csmthesis}
+\usepackage{cite}
+%\usepackage{IEEEtran}
+%\usepackage{aaai-bib}
+%Place content-specific packages
+\usepackage{float}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage{epsfig}
+\usepackage{url}
+\usepackage{extdash}
+\usepackage{graphicx}
+\graphicspath{{thesis_figures/}}
+\usepackage{epstopdf}
+\usepackage{fixltx2e}
+\usepackage{ragged2e}
+\usepackage{subfigure}
+%\usepackage{xspace}
+\usepackage[leqno]{amsmath}
+%\usepackage{amssymb}
+%\usepackage{dsfont}
+%\bibliographystyle{mlapa}
+
+\usepackage{geometry}
+\geometry{verbose, letterpaper, dvips, tmargin=1in, lmargin=1.6in, rmargin=0.9in, bmargin=1in, total={6in,9in}, includeheadfoot, headsep=12pt}
+
+\newcommand{\etal}{et al.\xspace}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\comment}[1]{}
+
+
+\def\newnot#1{\label{#1}}
+
+\def\ni{\noindent}
+\newcommand{\header}[1]{\noindent \bf{#1}\rm \\ \ni }
+\input{psfig.tex}
+\usepackage{etoolbox}
+\makeatletter
+\AtBeginDocument{
+  \patchcmd{\nocite}
+    {\ifx\@onlypreamble\document}
+    {\iftrue}
+    {}
+    {\@latex@warning@no@line{\string\nocite\space changed, no patch possible}}
+}
+\makeatother
+\setlength\parindent{0pt}
+\begin{document}
+\title{{\bf ANDROID MALWARE DETECTION AND CLASSIFICATION USING MACHINE LEARNING TECHNIQUES}}
+\author{SATYAJIT PADALKAR}
+\tolerance=1000
+\newpage\null\thispagestyle{empty}\newpage
+\newpage
+\include{Approvalsheet}
+\newpage
+\include{Curriculumvitae}
+\newpage
+\include{Abstract}
+\newpage
+\include{Titlepage}
+\newpage
+\include{Copyright}
+\newpage\null\thispagestyle{empty}\newpage
+
+%\frontmatter
+\pagenumbering{roman}
+
+\newpage
+\setcounter{page}{2}
+\cleardoublepage
+\newpage
+\include{Dedication}
+\cleardoublepage
+\include{Acknowledgment}
+\cleardoublepage
+\tableofcontents
+\cleardoublepage
+\listoffigures
+\cleardoublepage
+\listoftables
+\cleardoublepage
+%\mainmatter
+\pagenumbering{arabic}
+\pagestyle{myheadings}
+\markright{}
+\include{Introduction}
+\cleardoublepage
+\include{Overview}
+\cleardoublepage
+\include{Related_Work}
+\cleardoublepage
+\include{System_Architecture}
+\cleardoublepage
+\include{Data_Lab_Setup}
+\include{Results}
+\cleardoublepage
+\include{Conclusion}
+\cleardoublepage
+\appendix
+\include{Appendix}
+\cleardoublepage
+\thispagestyle{plain}
+%\bibliographystyle{aaai}
+\bibliographystyle{IEEEtran}
+\bibliography{ThesisBiblography}
+\nocite{*}
+\newpage\null\thispagestyle{empty}\newpage
+\end{document}

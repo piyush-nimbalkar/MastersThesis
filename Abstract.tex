@@ -1,0 +1,24 @@
+\newpage
+\pagestyle{empty}
+
+\begin{center}
+\vspace{0.1in}
+\large{\bf ABSTRACT} \par  
+\bigskip \bigskip
+\end{center}
+
+{\bf Title of Thesis:} \parbox[t]{4.5in}{{Android Malware Detection \& Classification Using Machine Learning Techniques\\
+Satyajit Padalkar, MS Computer Science, 2014\\}}
+\begin{singlespace}
+{\bf Thesis directed by:}{\hspace{2.5mm}} \parbox[t]{3in}{Dr. Anupam Joshi, Professor \\
+Department of Computer Science and \\ Electrical Engineering\\}
+\end{singlespace}
+
+Android is popular mobile operating system and there are multiple marketplaces for android applications. Most of these market places allow applications to be signed using self-signed certificates. Due to this practice there exists little or very limited control over the kind of applications that are being distributed. Also advancement of android root kits is making it increasingly easier to repackage existing android applications with malicious code. Conventional signature based techniques fail to detect these malwares. So detection and classification of android malwares is a very difficult problem to solve.
+
+We present a method to classify and detect such malwares by performing dynamic analysis of the system call sequences. Here we make use of machine learning techniques to build multiple models using distributions of syscalls as features. Using these models we predict whether given application is malicious or benign. Also we try to classify given application to specific known malware family. We also explore deeplearning methods such as stacked denoising autoencoder (SdA) algorithms and its effectiveness.
+
+We experimentally evaluate our methods using a real dataset of 600 malicious applications spread across 38 malware families along with 25 popular benign applications from various areas. We find that deeplearning algorithm (SdA) is most accurate in detecting a malware with lowest false positives while AdaBoost performs better in classifying a malware family.
+
+\par\vfil
+

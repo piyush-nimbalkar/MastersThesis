@@ -1,0 +1,26 @@
+Andriod Malware
+Distribution & stats
+Types of Vectors Attacks
+Repackaging Methods
+
+Algorithms
+Boosting
+SVM
+Stacked Denosing AutoEncoder - Deeplearning
+Explanation
+
+Expermental Evaluation
+	1. Data Collection & Properties
+		table of families, samples
+	2. Experimental Setup
+		Diagram
+	3. Feature set Selection:
+
+Results:
+	All Graphs
+
+Related work and discussion 
+
+Conclusion
+
+

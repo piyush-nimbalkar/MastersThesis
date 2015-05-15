@@ -1,0 +1,36 @@
+\newpage
+\pagestyle{empty}
+
+\begin{center}
+\vspace{0.1in}
+\large{\bf ABSTRACT} \par  
+\bigskip \bigskip
+\end{center}
+
+\begin{flushleft}
+{\bf Title of Thesis:} {Android Malware Detection And Classification Using Machine Learning Techniques\\
+Satyajit Padalkar, MS Computer Science, 2014\\}
+\begin{singlespace}
+{\bf Thesis directed by:}{\hspace{2.5mm}} \parbox[t]{3in}{Dr. Anupam Joshi, Professor \\
+Department of Computer Science and \\ Electrical Engineering}
+\end{singlespace}
+\end{flushleft}
+
+\begin{flushleft}
+\begin{singlespace}
+
+Proliferation of smartphones into day to day activities have made these devices integral part of lifestyle. As smartphones devices advances their computational power, sensors and communication technology, they are being used to newer application areas e.g health care, travel, photography, retail, advertising, education, payments, banking etc. These new areas and emerging features of mobile devices provides ample opportunity for new threats and ever increasing interest from hacker community.
+
+Andriod is one of popular mobile operating system. As Andriod operating system is open source and runs on multiple mobile platforms with various versions, It has limitations and unique properties and that differentiates it from other Linux kernel based operating systems. Various android root kits allow to repackage the existing applications and embed the malicous code into it. This makes detection and classification of android malware very difficult. Using conventional signature based techniques it is harder to detect and classify andriod malware.
+
+We present methods to classify and detect a andriod malware by doing a dynamic analysis of the system call sequences. Here we build the multiple machine learning models using distributions of syscalls as features. Using these models we predict weather given application is malicious or not. Also we try to classify the application to specific known malware family. We also explore deeplearning methods such as stacked denoising autoencoder algorithms(SdA).
+
+We experimentally evaluate our methods using a real dataset of 600 malware specimens from 38 families and 25 popular benign specimens from various application fields. We find that detection of malware using deeplearning algorithm (SdA) is most accurate with lowest false positives while classification into malware families using random forest algorithms (AdaBoost). We also find that the classification accuracy is stable under simple substitutions of syscalls with short equivalent syscalls sequences. 
+Topic distribution features provide comparable classification performance upon significantly increasing the computational cost (number of iterations) of LDA.  Moreover, using a surrogate data testing approach we find that the association between word/topic distributions and malware families is significant.
+
+Keywords: Andriod malware classification, Machine learning modeling, Deeplearning, Boosting algorithms, Decision trees, Surrogate
+data testing.
+\end{singlespace}
+\end{flushleft}
+\par\vfil
+

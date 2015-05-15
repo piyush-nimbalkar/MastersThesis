@@ -1,0 +1,96 @@
+\chapter{Andriod System Calls}
+\thispagestyle{plain}
+\begin{center}
+\label{Andriod System Calls}
+\begin{table}
+\caption{Andriod System Calls}
+\bigskip
+\begin{tabular}{l p{3.5cm} p{3.5cm} p{3.5cm} p{3.5cm}|}
+\hline
+ARM\_NR\_cacheflush & ARM\_NR\_set\_tls & \_\_ARM\_NR\_cacheflush & \_\_ARM\_NR\_set\_tls \\
+\_\_brk & \_\_fcntl & \_\_fcntl64 & \_\_fork \\
+\_\_fstatfs64 & \_\_getcpu & \_\_getcwd & \_\_getpriority \\
+\_\_ioctl & \_\_llseek & \_\_mmap2 & \_\_open \\
+\_\_openat & \_\_ptrace & \_\_reboot & \_\_rt\_sigaction \\
+\_\_rt\_sigprocmask & \_\_rt\_sigtimedwait & \_\_sched\_getaffinity & \_\_set\_thread\_area \\
+\_\_set\_tls & \_\_setresuid & \_\_setreuid & \_\_setuid \\
+\_\_sigsuspend & \_\_statfs64 & \_\_sys\_clone & \_\_syslog \\
+\_\_timer\_create & \_\_timer\_delete & \_\_timer\_getoverrun & \_\_timer\_gettime \\
+\_\_timer\_settime & \_\_waitid & \_exit & \_exit\_thread \\
+\_flush\_cache & \_llseek & \_newselect & \_waitpid \\
+accept & access & acct & bind \\
+brk & cacheflush & capget & capset \\
+chdir & chmod & chown & chown32 \\
+chroot & clock\_getres & clock\_gettime & clock\_nanosleep \\
+clock\_settime & clone & close & connect \\
+creat & delete\_module & dup & dup2 \\
+epoll\_create & epoll\_ctl & epoll\_wait & eventfd \\
+eventfd2 & execve & exit & exit\_group \\
+exit\_thread & faccessat & fchdir & fchmod \\
+fchmodat & fchown & fchown32 & fchownat \\
+fcntl & fcntl64 & fdatasync & fgetxattr \\
+flistxattr & flock & flush\_cache & fork \\
+fremovexattr & fsetxattr & fstat & fstat64 \\
+fstatat & fstatat64 & fstatfs64 & fsync \\
+ftruncate & ftruncate64 & futex & getcpu \\
+getcwd & getdents & getdents64 & getegid \\
+getegid32 & geteuid & geteuid32 & getgid \\
+getgid32 & getgroups & getgroups32 & getitimer \\
+getpeername & getpgid & getpgrp & getpid \\
+getppid & getpriority & getresgid & getresgid32 \\
+getresuid & getresuid32 & getrlimit & getrusage \\
+getsid & getsockname & getsockopt & gettid \\
+gettimeofday & getuid & getuid32 & getxattr \\
+init\_module & inotify\_add\_watch & inotify\_init & inotify\_rm\_watch \\
+\hline
+\end{tabular}
+\bigskip
+Continued in the next page ... \\
+\end{table}
+
+\begin{table}
+\begin{tabular}{l p{3.5cm} p{3.5cm} p{3.5cm} p{3.5cm}|}
+\hline
+ioctl & ioprio\_get & ioprio\_set & kill \\
+klogctl & lchown & lchown32 & lgetxattr \\
+link & listen & listxattr & llistxattr \\
+llseek & lremovexattr & lseek & lsetxattr \\
+lstat & lstat64 & madvise & mincore \\
+mkdir & mkdirat & mknod & mlock \\
+mlockall & mmap & mmap2 & mount \\
+mprotect & mremap & msync & munlock \\
+munlockall & munmap & nanosleep & newselect \\
+open & openat & pause & perf\_event\_open \\
+personality & pipe & pipe2 & poll \\
+prctl & pread & pread64 & ptrace \\
+pwrite & pwrite64 & read & readahead \\
+readlink & readv & reboot & recvfrom \\
+recvmsg & removexattr & rename & renameat \\
+restart\_syscall & rmdir & rt\_sigaction & rt\_sigprocmask \\
+rt\_sigreturn & rt\_sigtimedwait & sched\_get\_priority\_max & sched\_get\_priority\_min \\
+sched\_getaffinity & sched\_getparam & sched\_getscheduler & sched\_rr\_get\_interval \\
+sched\_setaffinity & sched\_setparam & sched\_setscheduler & sched\_yield \\
+select & sendfile & sendmsg & sendto \\
+set\_thread\_area & set\_tls & seteuid & seteuid32 \\
+setgid & setgid32 & setgroups & setgroups32 \\
+setitimer & setpgid & setpriority & setregid \\
+setregid32 & setresgid & setresgid32 & setresuid \\
+setresuid32 & setreuid & setreuid32 & setrlimit \\
+setsid & setsockopt & settimeofday & setuid \\
+setuid32 & setxattr & shutdown & sigaction \\
+sigaltstack & signalfd4 & sigpending & sigprocmask \\
+sigsuspend & socket & socketpair & stat \\
+stat64 & statfs64 & swapoff & swapon \\
+symlink & sync & sys\_clone & syscall \\
+sysinfo & syslog & tgkill & timer\_create \\
+timer\_delete & timer\_getoverrun & timer\_gettime & timer\_settime \\
+timerfd\_create & timerfd\_gettime & timerfd\_settime & times \\
+tkill & truncate & ugetrlimit & umask \\
+umount & umount2 & uname & unlink \\
+unlinkat & unshare & utimensat & utimes \\
+vfork & wait4 & waitid & waitpid & \\
+\hline
+\end{tabular}
+
+\end{table}
+\end{center}

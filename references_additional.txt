@@ -1,0 +1,32 @@
+http://www.cs.cornell.edu/courses/cs711/2005fa/papers/cj-usenix03.pdf
+
+http://www.scholarpedia.org/article/Ensemble_learning#AdaBoost
+
+
+
+psubusw & psubw & punpckhbw & punpckhdq & punpckhqdq
+punpckhwd & punpcklbw & punpckldq & punpcklqdq & punpcklwd
+push & pusha & pushad & pushf & pushfd
+pxor & rcl & rcpps & rcpss & rcr
+rdmsr & rdpmc & rdtsc & rep & repe
+repne & repnz & repz & ret & retf
+retn & rol & ror & rsm & rsqrtps
+rsqrtss & sahf & sal & sar & sbb
+scas & scasb & scasd & scasw & seta
+setae & setb & setbe & setc & sete
+setg & setge & setl & setle & setna
+setnae & setnb & setnbe & setnc & setne
+setng & setnge & setnl & setnle & setno
+setnp & setns & setnz & seto & setp
+setpe & setpo & sets & setz & setcc
+sfence & sgdt & shl & shld & shr
+shrd & shufpd & shufps & sidt & sldt
+smsw & sqrtpd & sqrtps & sqrtsd & sqrtss
+stc & std & sti & stmxcsr & stos
+stosb & stosd & stosw & str & sub
+subpd & subps & subsd & subss & sysenter
+sysexit & test & ucomisd & ucomiss & ud2
+unpckhpd & unpckhps & unpcklpd & unpcklps & verr
+verw & wait & wbinvd & wrmsr & xadd
+xchg & xlat & xlatb & xor & xorpd
+xorps
