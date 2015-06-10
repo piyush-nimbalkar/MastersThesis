@@ -4,47 +4,69 @@
 
 \section{Architecture Overview}
 
+%\begin{figure}[h]
+%\includegraphics[width=\textwidth, height=\textheight, keepaspectratio] {method_android_app_trace.png}
+%\caption{System for Android Malware Classification}
+%\label{fig:method_android_app_trace}
+%\end{figure}
+
 \begin{figure}[h]
-\includegraphics[width=\textwidth, height=\textheight, keepaspectratio] {method_android_app_trace.png}
-\caption{System for Android Malware Classification}
-\label{fig:method_android_app_trace}
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio] {system_architecure.png}
+	\caption{System Architecture}
+	\label{fig:system_architecture}
 \end{figure}
 
-The architecture of system is modular in nature and is designed to accommodate various repository locations. Malware samples can be located on a local storage or over a network storage. The system is also designed to automate data collection from android device and provide all housekeeping services that might be required by user to run various malicious application on a android device in a batch mode. System is capable of collecting system call and resource consumption related trace files. Also it can collect power related information for given application run. Figure~\ref{fig:method_android_app_trace} shows the block diagram of our system. System consists of five major modules:
+The architecture of the system comprises of several module which process the given input log file. After going through the several components we give out a RDF (Resource Description Framework) file as output. The modular nature of the architecture allows us to add more specialists to the existing framework. Thus, the framework was designed keeping scalability in mind. Figure~\ref{fig:system_architecture} shows the block diagram of the system architecture. It begins with \textit{Tabulate} module, where the input log file is parsed to detect its structure. Once the structure is detected the structured log file is separated into columns. These columns are they passed to the \textit{Decode} stage. In the \textit{Decode} module the columns are checked against various classifiers to find a match. After checking against different classifiers, the columns are given a score against every classifier in the system. The scores form a ranked list of probable classes for the columns in the log file. This ranked list is used in the \textit{Relationship Generator} to identify the relations between various columns in the log file. Once the columns are identified and the relationships have been detected, the \textit{Generate RDF} module will produce a set of RDF triples to represent the inferred semantics. The four major modules have been described in detail in rest of the section.
 
-\begin{figure}
-\includegraphics[width=\textwidth, height=\textheight, keepaspectratio] {data_pipeline.png}
-\caption{Data Processing \& Knowledge Generation}
-\label{method_andriod_data_pipeline}
-\end{figure}
+%The architecture of system is modular in nature and is designed to accommodate various repository locations. Malware samples can be located on a local storage or over a network storage. The system is also designed to automate data collection from android device and provide all housekeeping services that might be required by user to run various malicious application on a android device in a batch mode. System is capable of collecting system call and resource consumption related trace files. Also it can collect power related information for given application run. Figure~\ref{fig:method_android_app_trace} shows the block diagram of our system. System consists of five major modules:
 
-\subsection{Data Reader}
-\label{Data Reader}
+%\begin{figure}
+%\includegraphics[width=\textwidth, height=\textheight, keepaspectratio] {data_pipeline.png}
+%\caption{Data Processing \& Knowledge Generation}
+%\label{method_andriod_data_pipeline}
+%\end{figure}
+
+\subsection{Tabulate}
+\label{Tabulate}
 This module can read data from a local disk or over a network. This module traverse all directories of malware families one by one and grabs the malware sample (.apk file) from that directory for analysis. Each apk file is provided to 'House Keeping' module.
-\subsection{House Keeping}
-\label{House Keeping}
-This module is responsible for installation of malicious application on a android phone. We can use android emulator as well. Following activities are performed by House Keeping module.
-\begin{itemize}
-\item Installation of malicious application on a android phone.
-\item Informing Action Generator module about newly installed application.
-\item Removal of malicious application from a android phone.
-\item Collect log files generated for given application run.
-\end{itemize}
-\subsection{Action Generator}
-\label{Action Generator}
-This module is built on top of 'Android Monkey' tool. As per user configuration, this module generates pseudo-random streams of user events such as clicks, touches or gestures, as well as a number of system-level events. If required user can generate same sequence of actions. As a default action, tool is configured to generate random actions to mimic the user behavior.
-\subsection{Activity Logger}
-\label{Activity Logger}
-This module is responsible for logging all system calls and resource consumption related information on a android phone. This module requires "root" permission and needs to be installed on the "system" partition of the android phone.
-\subsection{Data Preprocessor}
-\label{Data Preprocessor}
-Once all log files are collected for the experiment run, this module converts collected data into single csv formatted file. Two csv file are generated by this module. These files are used for:
-\begin{itemize}
-\item Binary classification, where target is set to binary value (0 or 1).
-\item Multiclass classification, where target is set to "malware family" name.
-\end{itemize}
-\label{Knowledge Generation}
-This module is responsible for data massaging, feature selection and running various algorithms for experiment. This module can be located on local system or in the cloud.
+
+\subsection{Decode}
+\label{Decode}
+
+\subsection{Relationship Generator}
+\label{Relationship Generator}
+
+\subsection{Generate RDF}
+\label{Generate RDF}
+
+
+%\subsection{Data Reader}
+%\label{Data Reader}
+%This module can read data from a local disk or over a network. This module traverse all directories of malware families one by one and grabs the malware sample (.apk file) from that directory for analysis. Each apk file is provided to 'House Keeping' module.
+%\subsection{House Keeping}
+%\label{House Keeping}
+%This module is responsible for installation of malicious application on a android phone. We can use android emulator as well. Following activities are performed by House Keeping module.
+%\begin{itemize}
+%\item Installation of malicious application on a android phone.
+%\item Informing Action Generator module about newly installed application.
+%\item Removal of malicious application from a android phone.
+%\item Collect log files generated for given application run.
+%\end{itemize}
+%\subsection{Action Generator}
+%\label{Action Generator}
+%This module is built on top of 'Android Monkey' tool. As per user configuration, this module generates pseudo-random streams of user events such as clicks, touches or gestures, as well as a number of system-level events. If required user can generate same sequence of actions. As a default action, tool is configured to generate random actions to mimic the user behavior.
+%\subsection{Activity Logger}
+%\label{Activity Logger}
+%This module is responsible for logging all system calls and resource consumption related information on a android phone. This module requires "root" permission and needs to be installed on the "system" partition of the android phone.
+%\subsection{Data Preprocessor}
+%\label{Data Preprocessor}
+%Once all log files are collected for the experiment run, this module converts collected data into single csv formatted file. Two csv file are generated by this module. These files are used for:
+%\begin{itemize}
+%\item Binary classification, where target is set to binary value (0 or 1).
+%\item Multiclass classification, where target is set to "malware family" name.
+%\end{itemize}
+%\label{Knowledge Generation}
+%This module is responsible for data massaging, feature selection and running various algorithms for experiment. This module can be located on local system or in the cloud.
 
 \section{System Input}
 \label{System Input}
