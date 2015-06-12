@@ -2,33 +2,36 @@
 \thispagestyle{plain}
 \label{System Design}
 
+
 \section{Architecture Overview}
 
-%\begin{figure}[h]
-%\includegraphics[width=\textwidth, height=\textheight, keepaspectratio] {method_android_app_trace.png}
-%\caption{System for Android Malware Classification}
-%\label{fig:method_android_app_trace}
-%\end{figure}
+The architecture of the system comprises of several modules that process a given input log file. After going through the several components we give out a RDF (Resource Description Framework) file as output. The modular nature of the architecture allows us to add more specialists to the existing framework. Thus, the framework was designed keeping scalability in mind. Figure~\ref{fig:system_architecture} shows the block diagram of the system architecture. It begins with \textit{Tabulate} module, where the input log file is parsed to detect its structure. Once the structure is detected the structured log file is separated into columns. These columns are they passed to the \textit{Decode} stage. In the \textit{Decode} module the columns are checked against various classifiers to find a match. After checking against different classifiers, the columns are given a score against every classifier in the system. The scores form a ranked list of probable classes for the columns in the log file. This ranked list is used in the \textit{Relationship Generator} to identify the relations between various columns in the log file. Once the columns are identified and the relationships have been detected, the \textit{Generate RDF} module will produce a set of RDF triples to represent the inferred semantics. The four major modules have been described in detail in rest of the section.
+
 
 \begin{figure}[h]
-	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio] {system_architecure.png}
+	\centering
+	\includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio] {system_architecture.png}
 	\caption{System Architecture}
 	\label{fig:system_architecture}
 \end{figure}
 
-The architecture of the system comprises of several module which process the given input log file. After going through the several components we give out a RDF (Resource Description Framework) file as output. The modular nature of the architecture allows us to add more specialists to the existing framework. Thus, the framework was designed keeping scalability in mind. Figure~\ref{fig:system_architecture} shows the block diagram of the system architecture. It begins with \textit{Tabulate} module, where the input log file is parsed to detect its structure. Once the structure is detected the structured log file is separated into columns. These columns are they passed to the \textit{Decode} stage. In the \textit{Decode} module the columns are checked against various classifiers to find a match. After checking against different classifiers, the columns are given a score against every classifier in the system. The scores form a ranked list of probable classes for the columns in the log file. This ranked list is used in the \textit{Relationship Generator} to identify the relations between various columns in the log file. Once the columns are identified and the relationships have been detected, the \textit{Generate RDF} module will produce a set of RDF triples to represent the inferred semantics. The four major modules have been described in detail in rest of the section.
-
-%The architecture of system is modular in nature and is designed to accommodate various repository locations. Malware samples can be located on a local storage or over a network storage. The system is also designed to automate data collection from android device and provide all housekeeping services that might be required by user to run various malicious application on a android device in a batch mode. System is capable of collecting system call and resource consumption related trace files. Also it can collect power related information for given application run. Figure~\ref{fig:method_android_app_trace} shows the block diagram of our system. System consists of five major modules:
-
-%\begin{figure}
-%\includegraphics[width=\textwidth, height=\textheight, keepaspectratio] {data_pipeline.png}
-%\caption{Data Processing \& Knowledge Generation}
-%\label{method_andriod_data_pipeline}
-%\end{figure}
 
 \subsection{Tabulate}
 \label{Tabulate}
-This module can read data from a local disk or over a network. This module traverse all directories of malware families one by one and grabs the malware sample (.apk file) from that directory for analysis. Each apk file is provided to 'House Keeping' module.
+
+The \textit{Tabulate} module takes the structured log file as input and gives out a possible set of columns to the \textit{Decode} module for classification. The input log file can have any structure and the module will try to detect columns in it. The log file undergoes multiple iterations for the following reasons:
+\begin{itemize}
+\item To split the log file based on delimiters
+\item To detect consistent number of columns throughout the log file
+\item To detect and separate sub-columns
+\end{itemize}
+
+In the first iteration of the \textit{Tabulate} module, we split the log files using generic delimiters like space, square braces, round braces, single and double quotes. For braces and quotes we consider only those that are in pairs. Every row is thus separated in varied number of columns that may or may not be consistent. 
+
+Although most of the lines in a structured log file have fixed number of columns, it is not necessary that after separating on the above delimiters we will get equal number of columns. Also, some log entries can be outliers due to consistency in the way the logs are generated. But in most of the cases, there is a textual description at the end of the log entry which does not have a fixed number of words. If the description is not enclosed in a brace or quote, then it will be divided into several different columns. Considering this fact, we dynamically decide the number of columns that are to be extracted. For this, we put a threshold on the percentage of rows that will be considered in the system. We select rows starting with the ones that have the highest number of columns. We then select the next set of rows that have the second highest number of columns. We continue this process till we reach the threshold number of rows. At this moment we record the number of columns of the current set of rows. This is the number of columns that we choose to output from the system. All the rows having columns less than the selected number of columns are discarded. We keep the threshold pretty high (above 70 \%), so as to collect more number of rows. We also tried keeping the rows that have columns less than the selected number of columns and utilize them in the \textit{Decode} module. It was observed if a large percent of log entries have consistent columns, then the remaining smaller percent usually forms abnormal entries. Thus they create noise in the \textit{Decode} module when trying to detect the class of the column.
+
+In the third iteration, we loop through the columns that are already separated in the previous iterations. In the iteration we check the columns to detect sub-columns. We use the same set of delimiters to split the columns further. If all the elements in a particular columns are separable, then we split the column into multiple sub-columns. Before separation, we run that whole column to check if the whole columns matches any of the known classes. If there is a match found, then there is no need of splitting the column, as we can use the column as a whole.
+
 
 \subsection{Decode}
 \label{Decode}
