@@ -30,69 +30,42 @@ In the first iteration of the \textit{Tabulate} module, we split the log files u
 
 Although most of the lines in a structured log file have fixed number of columns, it is not necessary that after separating on the above delimiters we will get equal number of columns. Also, some log entries can be outliers due to consistency in the way the logs are generated. But in most of the cases, there is a textual description at the end of the log entry which does not have a fixed number of words. If the description is not enclosed in a brace or quote, then it will be divided into several different columns. Considering this fact, we dynamically decide the number of columns that are to be extracted. For this, we put a threshold on the percentage of rows that will be considered in the system. We select rows starting with the ones that have the highest number of columns. We then select the next set of rows that have the second highest number of columns. We continue this process till we reach the threshold number of rows. At this moment we record the number of columns of the current set of rows. This is the number of columns that we choose to output from the system. All the rows having columns less than the selected number of columns are discarded. We keep the threshold pretty high (above 70 \%), so as to collect more number of rows. We also tried keeping the rows that have columns less than the selected number of columns and utilize them in the \textit{Decode} module. It was observed if a large percent of log entries have consistent columns, then the remaining smaller percent usually forms abnormal entries. Thus they create noise in the \textit{Decode} module when trying to detect the class of the column.
 
-In the third iteration, we loop through the columns that are already separated in the previous iterations. In the iteration we check the columns to detect sub-columns. We use the same set of delimiters to split the columns further. If all the elements in a particular columns are separable, then we split the column into multiple sub-columns. Before separation, we run that whole column to check if the whole columns matches any of the known classes. If there is a match found, then there is no need of splitting the column, as we can use the column as a whole.
+In the third iteration, we loop through the columns that are already separated in the previous iterations. In this iteration, we check the columns to detect sub-columns. We use the same set of delimiters to split the columns further. If all the elements in a particular columns are separable, then we split the column into multiple sub-columns. Before separation, we run that complete column through the \textit{Decode} module to check if the whole column matches any of the known classes. If there is a match found, then there is no need of splitting the column, as we can use the column as a whole.
 
 
 \subsection{Decode}
 \label{Decode}
+
+The \textit{Decode} module does the work of assigning classes to the columns given by the \textit{Tabulate} module. For the classification of columns we created an extension of the specialists approach implemented by Puranik~\cite{puranik2012specialist}. Puranik defines a specialist as ``an entity that has expertise in the domain for which it is a specialist''. The mentioned specialists system was created for generic table data found on the Internet like SSN, phone numbers, addresses, etc. We extend this system to classify specific fields that are usually found in log files viz., timestamps, IP addresses, URLs, etc.
+
+Every column is passed through the specialists in the system. All the specialists give their score to the column based on how well the column matches the class of the specialist. We normalize this score to form a ranked list to predict the class of the system. If there is no match to any of the specialists then the columns is classified as `NA' (No Annotation). The normalized scores can also be considered as the confidence with which the specialists classifies a particular column into its respective class.
+
+Specialists can be of different types like regular expression based specialists, dictionary based specialists and classifier based specialists. Currently we are using only regular expression based and dictionary based specialists. But we can further extend it to use classifier based specialists as well. Following is the list of specialists present in the current system:
+
+\begin{enumerate}
+\item \textbf{Timestamp Specialist}\\
+The Timestamp specialist is a regular expression based specialist, which handles a lot of timestamp formats which are used in various systems for logging. This could also be implemented as a classifier based specialist using the Date specialist implemented by Puranik~\cite{puranik2012specialist}.
+\item \textbf{IP Address Specialist}\\
+The IP Address specialist is a regular expression based specialist. It checks for valid IP address formats and also makes sure that they are in a valid range.
+\item \textbf{URL Specialist}\\
+The URL specialist is a regular expression based specialist, which looks for various URL formats viz., HTTP, HTTPS, FTP, FTPS. It also detects URL having basic authentication.
+\item \textbf{Filepath Specialist}\\
+The Filepath specialist is also a regular expression based specialist. It looks for filepaths irrespective of the underlying system.
+\item \textbf{Email Specialist}\\
+The Email specialist is a regular expression based specialist, that looks for valid email formats in the given column. This follows the Internet standards to detect a valid email.
+\item \textbf{HTTP Status Code Specialist}\\
+The HTTP Status Code specialist is dictionary based specialist. It looks for the HTTP status code values provided by the W3 standards. These HTTP status codes are integer values.
+\item \textbf{HTTP Method Specialist}\\
+The HTTP Method specialist is a dictionary based specialist. It looks for the known HTTP verbs / methods like GET, PUT, POST, DELETE, etc.
+\item \textbf{HTTP Protocol Version Specialist}\\
+The HTTP Protocol Version specialist is a dictionary based specialist, which looks for the known HTTP protocol versions. The HTTP protocol versions are in a string format.
+\end{enumerate}
+
+We can easily extend the system to add more specialist to detect other fields in the log files. These specialists can be regular expression based or dictionary based specialists. For instance, if a system administrator decides to have a specialist for server names, then they can have a dictionary based specialist. They will keep a dictionary with all the server names. In future, if the our system comes across a log file with server name as the column, it will detect and classify the column precisely.
+ 
 
 \subsection{Relationship Generator}
 \label{Relationship Generator}
 
 \subsection{Generate RDF}
 \label{Generate RDF}
-
-
-%\subsection{Data Reader}
-%\label{Data Reader}
-%This module can read data from a local disk or over a network. This module traverse all directories of malware families one by one and grabs the malware sample (.apk file) from that directory for analysis. Each apk file is provided to 'House Keeping' module.
-%\subsection{House Keeping}
-%\label{House Keeping}
-%This module is responsible for installation of malicious application on a android phone. We can use android emulator as well. Following activities are performed by House Keeping module.
-%\begin{itemize}
-%\item Installation of malicious application on a android phone.
-%\item Informing Action Generator module about newly installed application.
-%\item Removal of malicious application from a android phone.
-%\item Collect log files generated for given application run.
-%\end{itemize}
-%\subsection{Action Generator}
-%\label{Action Generator}
-%This module is built on top of 'Android Monkey' tool. As per user configuration, this module generates pseudo-random streams of user events such as clicks, touches or gestures, as well as a number of system-level events. If required user can generate same sequence of actions. As a default action, tool is configured to generate random actions to mimic the user behavior.
-%\subsection{Activity Logger}
-%\label{Activity Logger}
-%This module is responsible for logging all system calls and resource consumption related information on a android phone. This module requires "root" permission and needs to be installed on the "system" partition of the android phone.
-%\subsection{Data Preprocessor}
-%\label{Data Preprocessor}
-%Once all log files are collected for the experiment run, this module converts collected data into single csv formatted file. Two csv file are generated by this module. These files are used for:
-%\begin{itemize}
-%\item Binary classification, where target is set to binary value (0 or 1).
-%\item Multiclass classification, where target is set to "malware family" name.
-%\end{itemize}
-%\label{Knowledge Generation}
-%This module is responsible for data massaging, feature selection and running various algorithms for experiment. This module can be located on local system or in the cloud.
-
-\section{System Input}
-\label{System Input}
-The system requires android malware repository location. Expected directory structure is shown in figure ~\ref{fig:malware_dir_struct} where every subdirectory represents \(Malware Famliy Name\) and each \(.apk\) file represent the android application specimen. System also expects non malicious application to be placed under \(benign\_apps\) subdirectory.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth, height=0.4\textheight, keepaspectratio]{malware_dir_struct.png}
-\caption{Input Directory Structure}
-\label{fig:malware_dir_struct}
-\end{figure}
-
-\section{System Output}
-\label{System Output}
-For each malware sample system generates a log file on a Android device. System pulls this log file and places into the same subdirectory from where the application specimen, apk file, was selected for installation. To resolve multiple runs of same application, system adds timestamps at the end of filename. All these logs files are then parsed into a csv file where frequency of each system call forms the feature and malware family name forms the target label. The system generates two out files.
-\begin{itemize}
-\item b\_android\_apps\_run.csv : file for binary class classification (malicious\/benign).
-\item m\_android\_apps\_run.csv : file for multi class classification (malware families).
-\end{itemize}
-Typically user needs to normalise the input before building a classifier on this data. We perform this step in two stages. 
-\begin{itemize}
-\item Feature Selection: We use $sparseLDA$ normalization algorithm for feature selection.
-\item Normalize: We use Zscore normalization technique for our analysis.
-\end{itemize}
-
-This would generate a matrix of size \(N \times W\), where \(W\) is selected features with target as a last column and \(N\) is the number of application run for given dataset. This matrix contains normalized values and then used as a input to various classifiers. Binary classification is done to detect malicious vs benign apps from given data set. Multiclass classification is done to classify given application into malware families. We use various algorithms such as RandomeForest, AdaBoost, SVM, Neural Network, SdA for classification. Results are discussed in the section~\ref{Results}.
