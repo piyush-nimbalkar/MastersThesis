@@ -47,8 +47,10 @@ Specialists can be of different types like regular expression based specialists,
 The Timestamp specialist is a regular expression based specialist, which handles a lot of timestamp formats which are used in various systems for logging. This could also be implemented as a classifier based specialist using the Date specialist implemented by Puranik~\cite{puranik2012specialist}.
 \item \textbf{IP Address Specialist}\\
 The IP Address specialist is a regular expression based specialist. It checks for valid IP address formats and also makes sure that they are in a valid range.
+\item \textbf{Port Number Specialist}\\
+The Port number specialist is a regular expression based specialist. It checks for valid port numbers, that is, those that are in the range of 0 to 65535.
 \item \textbf{URL Specialist}\\
-The URL specialist is a regular expression based specialist, which looks for various URL formats viz., HTTP, HTTPS, FTP, FTPS. It also detects URL having basic authentication.
+The URL specialist is a regular expression based specialist, which looks for various URL formats viz., \textit{HTTP}, \textit{HTTPS}, \textit{FTP}, \textit{FTPS}. It also detects URL having basic authentication.
 \item \textbf{Filepath Specialist}\\
 The Filepath specialist is also a regular expression based specialist. It looks for filepaths irrespective of the underlying system.
 \item \textbf{Email Specialist}\\
@@ -56,9 +58,11 @@ The Email specialist is a regular expression based specialist, that looks for va
 \item \textbf{HTTP Status Code Specialist}\\
 The HTTP Status Code specialist is dictionary based specialist. It looks for the HTTP status code values provided by the W3 standards. These HTTP status codes are integer values.
 \item \textbf{HTTP Method Specialist}\\
-The HTTP Method specialist is a dictionary based specialist. It looks for the known HTTP verbs / methods like GET, PUT, POST, DELETE, etc.
+The HTTP Method specialist is a dictionary based specialist. It looks for the known HTTP verbs / methods like \textit{GET}, \textit{PUT}, \textit{POST}, \textit{DELETE}, etc.
 \item \textbf{HTTP Protocol Version Specialist}\\
 The HTTP Protocol Version specialist is a dictionary based specialist, which looks for the known HTTP protocol versions. The HTTP protocol versions are in a string format.
+\item \textbf{Log Level Specialist}\\
+The Log level specialist is a dictionary based specialist, which looks for the generally recommended log levels keywords. The log levels are in string format and contains log levels like \textit{Info}, \textit{Debug}, \textit{Error}, \textit{Warn}, etc.
 \end{enumerate}
 
 We can easily extend the system to add more specialist to detect other fields in the log files. These specialists can be regular expression based or dictionary based specialists. For instance, if a system administrator decides to have a specialist for server names, then they can have a dictionary based specialist. They will keep a dictionary with all the server names. In future, if the our system comes across a log file with server name as the column, it will detect and classify the column precisely.
