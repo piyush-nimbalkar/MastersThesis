@@ -15,3 +15,25 @@ The world of Semantic Web has huge amount of data and is still growing. There ar
 The details of how the framework is implemented will be discussed in the $4^{th}$ chapter. Before that we will briefly introduce some concepts and terminologies used in this thesis for better understanding.
 
 \section{Linked Data}
+
+Before knowing more about Linked Data, we will briefly talk about Semantic Web. Semantic Web is a way of linking or correlating data between entities that allows for rich interrelations of the data available across the world on Web. Most of the data we see on the Web is in the forms of HTML pages which are linked with each other through \textit{hyperlinks}. Though the pages are linked, there is no linking between the data within the Web pages. This makes it difficult for computer systems to make sense of the plain Web pages. Semantic Web technologies have encouraged people to create open data stores on the Web, add their own vocabularies and rules to handle this data.
+
+To create a semantic web of data, it is important to make the huge amount of data available in a standardized format. Apart from the data, we also need to maintain the relationships among the data. The collection of this data which is related with each other is known as Linked Data. DBPedia \footnote{http://dbpedia.org/} is one such example of a large dataset of Linked Data.
+
+\section{Resource Description Framework (RDF)}
+
+The Resource Description Framework (RDF) is a set of specifications, designed to model the Linked Data discussed in the previous section. It acts as an metadata model. Using certain syntax, rules and serialization formats, it helps in representing knowledge bases in a generic way which can be used by semantic tools and applications. RDF data internally forms a directed multi-graph. RDF expressions resemble the class diagrams or entity-relationship models. They are usually expressed in the form of \textit{triples}. For instance, to represent the fact ``London is the capital of United Kingdom'', the RDF \textit{triple} will have: the subject as `London', the predicate would be `is capital of' and the object as `United Kingdom'.
+
+\section{Web Ontology Language (OWL)}
+
+OWL, the Web Ontology Language is designed by the W3C Web Ontology Working Group. It is set of formal language to represent the structure of knowledge bases also known as ontologies. Ontologies are a flexible way to describe structure of of information from the Internet which accommodates heterogeneous data sources. OWL which is written in XML, has formal semantics and build upon the standards of Resource Description Framework (RDF).
+
+\section{Specialist Framework}
+
+The specialist framework was built by Puranik~\cite{puranik2012specialist}. This is an approach to classify given input columns using a set of specialists. These specialists are basically experts to identify a particular class of columns. The framework runs the column through all the specialists and gives a ranked list for it. The framework was designed to classify tables found on the web and create knowledge repositories from them.
+
+\section{RDFlib}
+
+RDFlib \footnote{https://rdflib.readthedocs.org/} is a pure python package created to work with RDF and other semantic data formats. It provides a rich set of parsers and serializers for RDF/XML, N3, NTriples, N-Quads, Turtle, RDFa and Mircodata. Apart from the parsers, it provides a Graph interface which allows us to store the relational data in a graph, keeping the semantic structure of the data. RDFlib also provides SPARQL implementation. SPARQL (SPARQL Protocol and RDF Query Language) is a query language for RDF datastores. 
+
+RDFlib facilitated adding plugins for parsers, serializers, data stores and to handle query results. We are currently using the OWL ontology to detect the relationships between various classes. RDFlib supports the parsing of OWL ontologies using the OWL-RL package developed on top of it.
