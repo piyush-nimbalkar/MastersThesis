@@ -48,8 +48,6 @@ In this experiment we tested the precision with which the log files are converte
 
 As discussed in previous chapter, we separate the log files using standard delimiters. Due to this, certain columns having multiple words but no surrounding characters, get separated as multiple columns. It has been observed in most of the cases, such descriptive columns with multiple words are found at the tail of the log entry. Thus, most of the initial columns are easily separated. Due to the said fact about log files, our framework can give out more columns than the expected number of columns. We also get a high recall as we do not expect those columns to be separated. While the recall is high, we observe a low precision. Due to the extraneous columns, which are not there in the original log files, we get a low precision compared to the recall. In Figure~\ref{fig:tabulate_precision_recall_1} we see that for both the datasets, we get a high recall and low precision.
 
-We repeat this experiment with the same log files, but now we strip out the trailing textual part. In real life, we can find tools which can clean the log files and in this case strip the unwanted text. Figure~\ref{fig:tabulate_precision_recall_2} shows the precision and recall with the modified log files. Now, we see that both precision and recall are high for the datasets.
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio] {tabulate_precision_recall_2.png}
@@ -57,3 +55,19 @@ We repeat this experiment with the same log files, but now we strip out the trai
 	\label{fig:tabulate_precision_recall_2}
 \end{figure}
 
+We repeat this experiment with the same log files, but now we strip out the trailing textual part. In real life, we can find tools which can clean the log files and in this case strip the unwanted text. Figure~\ref{fig:tabulate_precision_recall_2} shows the precision and recall with the modified log files. Now, we see that both precision and recall are high for the datasets. The high
+precision in the later case indicates that most of the log files have structured data at the beginning of the log entries. This is followed by a more verbose message field.
+
+Although the recall of both the datasets is almost similar, we see that it is slightly better in the Original dataset (Figure~\ref{fig:tabulate_precision_recall_1}). Some of the log files like \textit{apache\_access} have the textual part embedded in quotes. This makes it easier for the \textit{Tabulate} module to separate the column as a whole. While in the Synthetic dataset, we have appended the text without enclosing quotes. Hence, the recall is better in the Original dataset compared to the Synthetic dataset.
+
+
+\section{Column Annotation}
+
+In the \textit{Decode} module we annotate the columns present in the table generated from the \textit{Tabulate} module. We gave columns from the log files to manual annotators. The annotations from the manual annotators form the ground truth for this module. The manual annotators mark each class as \textit{vital}, \textit{okay} or \textit{incorrect}, for every column in the table. This is analogous to the strategy adopted by Venetis \textit{et al}.\cite{venetis2011recovering}. For instance, an annotator could mark, the URL as \textit{vital}, FilePath as \textit{okay} and HTTPMethod as \textit{incorrect}, for the column URL. Each column may have multiple \textit{vital}, \textit{okay} or \textit{incorrect} labels. This task of manual annotation was given to three Graduate students in Computer Science at the University of Maryland, Baltimore County.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth, height=0.5\textheight, keepaspectratio] {decode_rank_1.png}
+	\caption{Percentage of \textit{vital} and \textit{okay} classes at rank 1}
+	\label{fig:decode_rank_1_acccuracy}
+\end{figure}
