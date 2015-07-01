@@ -6,22 +6,25 @@ In this chapter we discuss the datasets used and the experiment setup to test th
 
 
 \section{Data Setup}
-We use different sets of log files to test the framework. Primarily, we use two datasets viz., original log files and synthetically generated log files. Table~\ref{table:dataset_distribution} gives a general statistic about the log files in each dataset, total columns and average columns present in all the log files of the dataset.
+We use different sets of log files to test the framework. Primarily, we use two datasets viz., original log files and synthetically generated log files. Table~\ref{table:dataset_distribution} gives a general statistic about the log files in each dataset, total columns, average columns and relations per table in all the log files of the dataset.
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
 \begin{table}[htbp]
-\caption{Number of log files, total columns present and the average number of columns in each dataset}
+\caption{Number of log files, total columns present, average columns and relations per table in each dataset}
 \bigskip
 \label{table:dataset_distribution}
 \centering
 \begin{center}
 \def\arraystretch{1.8}
-\begin{tabular}{|@{\hskip 1cm}c@{\hskip 1cm}|c|c|c|}
+\begin{tabular}{|@{\hskip 1cm}c@{\hskip 1cm}|c|c|c|c|}
 \hline
-\textit{Dataset} & \textit{Tables} & \textit{Columns} & \textit{Average Columns}\\ 
+\textit{Dataset} & \textit{Tables} & \textit{Columns} & \specialcell{\textit{Average Columns/} \\ \textit{Table}} & \specialcell{\textit{Average Relations/}\\ \textit{Table}} \\
 \hline
-Original & 11 & 78 & 7\\
+Original & 11 & 78 & 7 & 3 \\
 \hline
-Synthetic & 20 & 150 & 8\\ 
+Synthetic & 20 & 150 & 8 & 5 \\
 \hline
 \end{tabular}
 \end{center}
@@ -42,7 +45,7 @@ In this experiment we tested the precision with which the log files are converte
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.9\textwidth, height=0.5\textheight, keepaspectratio] {tabulate_precision_recall_1.png}
-	\caption{Precision and Recall for Column Separation}
+	\caption{Precision and recall for column separation}
 	\label{fig:tabulate_precision_recall_1}
 \end{figure}
 
@@ -51,7 +54,7 @@ As discussed in previous chapter, we separate the log files using standard delim
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.9\textwidth, height=0.5\textheight, keepaspectratio] {tabulate_precision_recall_2.png}
-	\caption{Precision and Recall for Column Separation without Trailing Textual Data}
+	\caption{Precision and recall for column separation without trailing textual data}
 	\label{fig:tabulate_precision_recall_2}
 \end{figure}
 
@@ -83,7 +86,7 @@ The human annotators were given ten classes for every column. If they could not 
 
 In the \textit{Decode} module, we get a ranked list of classes for every column in the table. Figure~\ref{fig:decode_rank_1_partial}, shows the percentage distribution of \textit{vital} and \textit{okay} classes found at rank 1. This is an aggregate of all the columns in the datasets. In the Original dataset, 96.15\% of the top ranked class labels are marked as \textit{vital} and 1.28\% are marked as \textit{okay}. While in the Synthetic dataset, 91.08\% of the top ranked class labels are marked as \textit{vital}. There are no top ranked class labels marked as \textit{okay}. Thus, the distribution is highly inclined towards \textit{vital} for columns in both the datasets. 
 
-Overall we see a good percentage of relevant class labels, i.e., either \textit{vital} or \textit{okay}, are found at rank 1. Thus, the system has a good accuracy for column prediction as most of the predicted class labels are found at the topmost rank.
+Figure~\ref{fig:decode_rank_1_full} shows the zoomed out version of Figure~\ref{fig:decode_rank_1_partial}. It is observed that there is not much difference in the percentage of correctly predicted classes for both datasets. Overall we see a good percentage of relevant class labels, i.e., either \textit{vital} or \textit{okay}, are found at rank 1. Thus, the system has a good accuracy for column prediction as most of the predicted class labels are found at the topmost rank.
 
 \begin{figure}[h]
 	\centering
@@ -99,25 +102,34 @@ Also, the relevant class labels for both the datasets are comparable. We see tha
 
 \section{Relation Annotation}
 
+Similar to the \textit{Decode} module we annotate the relations between various columns present in the table. These relations are predicted using the IDS Ontology. We gave tabulated log files to human annotators, and they were asked to annotate the relation for a set of column pairs in them. For every pair of columns they were given a set a relation labels. The annotators marked each relation label as \textit{vital}, \textit{okay} or \textit{incorrect}, for every pair of columns given to them. This is again, similar to the strategy used by Venetis \textit{et al.}\cite{venetis2011recovering}. The annotators were allowed to mark multiple labels as \textit{vital}, \textit{okay} or \textit{incorrect}. They were given a choice to mark a relation as No Annotation (N.A.) if they did not find suitable relation from the given set of relation labels.
+
+Figure~\ref{fig:relation_precision_recall} shows the precision and recall calculated for the relation prediction module. It is observed that the recall for both datasets is very high. The relations that are predicted by our framework come out to be accurate, and hence we get a very high recall. While the precision of the Original dataset is very high, that of the Synthetic dataset comes out quite less comparatively. Most of the relationships we have in the ontology are added by observing the actual log files present in the Original dataset. That is why, our framework's predictions match quite well with the actual relations. On the other hand, in Synthetic dataset, there are a lot of false positives. This means we are predicting relations that do not exist in the human annotated source. Hence, we see a dip in the precision of relation prediction for Synthetic dataset.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth, height=\textheight, keepaspectratio] {relation_precision_recall.png}
+	\caption{Precision and recall for relation annotations}
+	\label{fig:relation_precision_recall}
+\end{figure}
+
+Figure~\ref{fig:relation_vital_okay_partial} shows the percentage distribution of predicted relations that are marked as \textit{vital} and \textit{okay}. Almost all of the relations predicted are annotated as \textit{vital} by the human annotators. In the Original dataset all the predicted relations are annotated as \textit{vital}. While in Synthetic dataset, a small percentage i.e. 6.67\% of predicted relations are marked as \textit{okay} and rest are \textit{vital}. There are pairs of column like \textit{EmailAddress} and \textit{Timestamp} that have multiple relations like \textit{sentAt} and \textit{receivedAt} amongst them. This causes some of them to be marked as \textit{okay} by human annotators. Such pairs occur more frequently in the Synthetic dataset and hence it has higher percentage of \textit{okay} labels compared to the Original dataset. Figure~\ref{fig:relation_vital_okay_full} is a zoomed out version of Figure~\ref{fig:relation_vital_okay_partial}. It clearly shows that there is not much difference in the distribution of \textit{vital} and \textit{okay} labels for both datasets. Also, most of predicted relations are marked as \textit{vital}.
+
+
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.9\textwidth, height=\textheight, keepaspectratio] {relation_vital_okay_partial.png}
-	\caption{Percentage of relevant classes at ranks 1 to 4}
+	\caption{Percentage of \textit{vital} and \textit{okay} relation labels}
 	\label{fig:relation_vital_okay_partial}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.9\textwidth, height=\textheight, keepaspectratio] {relation_vital_okay_full.png}
-	\caption{Percentage of relevant classes at ranks 1 to 4}
+	\caption{Percentage of \textit{vital} and \textit{okay} relation labels}
 	\label{fig:relation_vital_okay_full}
 \end{figure}
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.9\textwidth, height=\textheight, keepaspectratio] {relation_precision_recall.png}
-	\caption{Percentage of relevant classes at ranks 1 to 4}
-	\label{fig:relation_precision_recall}
-\end{figure}
+
 
 
