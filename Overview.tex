@@ -2,17 +2,38 @@
 \thispagestyle{plain}
 \label{Overview}
 
-The framework we propose works well with structured log files, where we can separate them into distinct columns and then predict the possible relations between those. We propose a scalable column detection module wherein we can plug in more column expert modules to identify other columns. Currently we support ten distinct classes of columns.
+Log file analysis has been an interesting area in the cybersecurity domain. By analyzing log files we can help prevent our system from malicious activities. Predicting the structure and the semantic meaning for a log file with unknown source or format definitely possess an advantage. Every year, large number of tools and devices are added to the current software world. A security specialist or system administrator would not want to manually analyze every new log file and then feed it into their system. 
 
-The part of predicting the semantic relations between various columns in the log file is our novel contribution to the world of log file analysis. Finding relations definitely benefits in understanding semantics of the log files. Having internal relations can help make the log files less verbose, by preventing the need to explain every detail. Logs are written such that they do not become extremely verbose. As the size increases, the cost to maintain the huge amount of log data increases. That is why, we find log files with concise columns. We see columns like IP addresses, timestamps, email addresses, urls etc. Most of the columns in the log files have inherent connections to each other. These are not visible by looking at the log file and are documented somewhere else. For example let us consider, \textit{sendmail} log file, which is a tool for email routing. Looking at the log file we see random server names and email addresses. If an automated system can figure out the relationship between these fields they we can say that the email is sent or received from the server name mentioned in the log entry.
+The proposed framework works well with structured log files, where we can separate them into distinct columns and then predict the possible relations between those. The part of predicting the semantic relations between various columns in the log file is our novel contribution to the world of log file analysis. Finding relations definitely benefits in understanding semantics of the log files. Having internal relations can help make the log files less verbose, by preventing the need to explain every detail. Logs are written such that they do not become extremely verbose. As the size increases, the cost to maintain the huge amount of log data increases. That is why, we find log files with concise columns. We see columns like IP addresses, timestamps, email addresses, urls etc. Most of the columns in the log files have inherent connections to each other. These are not visible by looking at the log file and are documented somewhere else. For example let us consider, \textit{sendmail} log file, which is a tool for email routing. Table~\ref{table:sendmail_logfile} shows a sample sendmail log file with selected columns. Looking at the log file we see timestamps, random server names and email addresses. If an automated system can figure out the relationship between these fields then we can say that user with email address in the third column is sending an email to the address in fourth column via server mentioned in the second column at timestamp in the first.
 
-Predicting the structure and the semantic meaning for a log file with unknown source or format definitely possess an advantage in cybersecurity log analysis. Every year, large number of tools and devices are added to the current software world. A security specialist or system administrator would not want to manually analyze every new log file and then feed it into their system. 
+
+\begin{table}[htbp]
+\caption{Sample sendmail log file with selected columns}
+\bigskip
+\label{table:sendmail_logfile}
+\centering
+\begin{center}
+\def\arraystretch{1.8}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Mar 23 03:12:21 & mail\_server\_1 & from=\textless user1@sender.com\textgreater & rcpt=\textless shanon@umbc.edu\textgreater \\
+\hline
+Mar 23 03:12:21 & mail\_server\_2 & from=\textless user2@sender.com\textgreater & rcpt=\textless george@umbc.edu\textgreater \\
+\hline
+Mar 23 03:12:21 & mail\_server\_1 & from=\textless user3@sender.com\textgreater & rcpt=\textless david@umbc.edu\textgreater \\
+\hline
+Mar 23 03:12:21 & mail\_server\_2  & from=\textless user4@sender.com\textgreater & rcpt=\textless chris@umbc.edu\textgreater \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
 
 The framework is also crucial in Security Information and Event Management (SIEM) systems, to detect anomalous behavior in the system. If the SIEM, is able to know the structure of any random log file in the infrastructure, it can autonomously detect threats. We can defend out systems against unknown attacks before hand. For instance, an apache access log files has columns like IP address, resource path and user-agent, out of the many. The IP address is the address of the machine requesting the resource accessed by the resource path. User-agent is the software which can request the resource for the user of the IP address. This can be anything from a browser to a command line tool. Knowing about the log file, now we can have relations like `Resource\_Path \textit{requestedUsing} User-agent' or `IP\_Address \textit{requestedResource} Resource\_Path'. With this knowledge SIEMs can detect threats like an IP address is accessing unauthorized resources or if it is accessing using suspicious user-agents. This becomes easy on knowing the semantic information about the log file.
 
 The world of Semantic Web has huge amount of data and is still growing. There are knowledge bases or ontologies which already have many classes and properties that are found in the columns of log files. If this data is extended to support different kinds of data found in log files, we will have a huge collection of semantic log file data. This can be used to process and smartly analyze generic log files.
 
-The details of how the framework is implemented will be discussed in the $4^{th}$ chapter. Before that we will briefly introduce some concepts and terminologies used in this thesis for better understanding.
+The details of how the framework is implemented will be discussed in the Chapter 4. Before that we will briefly introduce some concepts and terminologies used in this thesis for better understanding.
 
 \section{Linked Data}
 
