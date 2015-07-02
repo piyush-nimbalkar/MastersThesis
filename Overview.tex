@@ -33,7 +33,7 @@ The framework is also crucial in Security Information and Event Management (SIEM
 
 The world of Semantic Web has huge amount of data and is still growing. There are knowledge bases or ontologies which already have many classes and properties that are found in the columns of log files. If this data is extended to support different kinds of data found in log files, we will have a huge collection of semantic log file data. This can be used to process and smartly analyze generic log files.
 
-The details of how the framework is implemented will be discussed in the Chapter 4. Before that we will briefly introduce some concepts and terminologies used in this thesis for better understanding.
+The details of how the framework is implemented will be discussed in the Chapter~\ref{System Design}. Before that we will briefly introduce some concepts and terminologies used in this thesis for better understanding.
 
 \section{Linked Data}
 
@@ -55,6 +55,6 @@ The specialist framework was built by Puranik~\cite{puranik2012specialist}. This
 
 \section{RDFlib}
 
-RDFlib \footnote{https://rdflib.readthedocs.org/} is a pure python package created to work with RDF and other semantic data formats. It provides a rich set of parsers and serializers for RDF/XML, N3, NTriples, N-Quads, Turtle, RDFa and Mircodata. Apart from the parsers, it provides a Graph interface which allows us to store the relational data in a graph, keeping the semantic structure of the data. RDFlib also provides SPARQL implementation. SPARQL (SPARQL Protocol and RDF Query Language) is a query language for RDF datastores. 
+RDFLib \footnote{https://rdflib.readthedocs.org/} is a pure python package created to work with RDF and other semantic data formats. It provides a rich set of parsers and serializers for RDF/XML, N3, NTriples, N-Quads, Turtle, RDFa and Mircodata. Apart from the parsers, it provides a Graph interface which allows us to store the relational data in a graph, keeping the semantic structure of the data. RDFLib also provides SPARQL implementation. SPARQL (SPARQL Protocol and RDF Query Language) is a query language for RDF datastores. 
 
-RDFlib facilitates adding plugins for parsers, serializers, data stores and to handle query results. We are currently using the OWL ontology to detect the relationships between various classes. RDFlib supports the parsing of OWL ontologies using the OWL-RL package developed on top of it.
+RDFLib facilitates adding plugins for parsers, serializers, data stores and to handle query results. We are currently using the OWL ontology to detect the relationships between various classes. RDFLib supports the parsing of OWL ontologies using the OWL-RL package developed on top of it.
