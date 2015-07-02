@@ -1,7 +1,9 @@
-\chapter{Overview}
+\chapter{Overview and Related Work}
 \thispagestyle{plain}
 \label{Overview}
 
+
+\section{Overview}
 Log file analysis has been an interesting area in the cybersecurity domain. By analyzing log files we can help prevent our system from malicious activities. Predicting the structure and the semantic meaning for a log file with unknown source or format definitely possess an advantage. Every year, large number of tools and devices are added to the current software world. A security specialist or system administrator would not want to manually analyze every new log file and then feed it into their system. 
 
 The proposed framework works well with structured log files, where we can separate them into distinct columns and then predict the possible relations between those. The part of predicting the semantic relations between various columns in the log file is our novel contribution to the world of log file analysis. Finding relations definitely benefits in understanding semantics of the log files. Having internal relations can help make the log files less verbose, by preventing the need to explain every detail. Logs are written such that they do not become extremely verbose. As the size increases, the cost to maintain the huge amount of log data increases. That is why, we find log files with concise columns. We see columns like IP addresses, timestamps, email addresses, urls etc. Most of the columns in the log files have inherent connections to each other. These are not visible by looking at the log file and are documented somewhere else. For example let us consider, \textit{sendmail} log file, which is a tool for email routing. Table~\ref{table:sendmail_logfile} shows a sample sendmail log file with selected columns. Looking at the log file we see timestamps, random server names and email addresses. If an automated system can figure out the relationship between these fields then we can say that user with email address in the third column is sending an email to the address in fourth column via server mentioned in the second column at timestamp in the first.
@@ -33,28 +35,32 @@ The framework is also crucial in Security Information and Event Management (SIEM
 
 The world of Semantic Web has huge amount of data and is still growing. There are knowledge bases or ontologies which already have many classes and properties that are found in the columns of log files. If this data is extended to support different kinds of data found in log files, we will have a huge collection of semantic log file data. This can be used to process and smartly analyze generic log files.
 
+\section{Background}
 The details of how the framework is implemented will be discussed in the Chapter~\ref{System Design}. Before that we will briefly introduce some concepts and terminologies used in this thesis for better understanding.
 
-\section{Linked Data}
+\subsection{Linked Data}
 
 Before knowing more about Linked Data, we will briefly talk about Semantic Web. Semantic Web is a way of linking or correlating data between entities that allows for rich interrelations of the data available across the world on Web. Most of the data we see on the Web is in the forms of HTML pages which are linked with each other through \textit{hyperlinks}. Though the pages are linked, there is no linking between the data within the Web pages. This makes it difficult for computer systems to make sense of the plain Web pages. Semantic Web technologies have encouraged people to create open data stores on the Web, add their own vocabularies and rules to handle this data.
 
 To create a semantic web of data, it is important to make the huge amount of data available in a standardized format. Apart from the data, we also need to maintain the relationships among the data. The collection of this data which is related with each other is known as Linked Data. DBPedia \footnote{http://dbpedia.org/} is one such example of a large dataset of Linked Data.
 
-\section{Resource Description Framework (RDF)}
+\subsection{Resource Description Framework (RDF)}
 
 The Resource Description Framework (RDF) is a set of specifications, designed to model the Linked Data discussed in the previous section. It acts as an metadata model. Using certain syntax, rules and serialization formats, it helps in representing knowledge bases in a generic way which can be used by semantic tools and applications. RDF data internally forms a directed multi-graph. RDF expressions resemble the class diagrams or entity-relationship models. They are usually expressed in the form of \textit{triples}. For instance, to represent the fact ``London is the capital of United Kingdom'', the RDF \textit{triple} will have: the subject as `London', the predicate would be `is capital of' and the object as `United Kingdom'.
 
-\section{Web Ontology Language (OWL)}
+\subsection{Web Ontology Language (OWL)}
 
 OWL, the Web Ontology Language is designed by the W3C Web Ontology Working Group. It is set of formal language to represent the structure of knowledge bases also known as ontologies. Ontologies are a flexible way to describe structure of information from the Internet which accommodates heterogeneous data sources. OWL which is written in XML, has formal semantics and build upon the standards of Resource Description Framework (RDF).
 
-\section{Specialist Framework}
+\subsection{Specialist Framework}
 
 The specialist framework was built by Puranik~\cite{puranik2012specialist}. This is an approach to classify a given input column using a set of specialists. These specialists are basically experts to identify a particular class of columns. The framework runs the column through all the specialists and gives a ranked list for it. The framework was designed to classify tables found on the web and create knowledge repositories from them.
 
-\section{RDFlib}
+\subsection{RDFlib}
 
 RDFLib \footnote{https://rdflib.readthedocs.org/} is a pure python package created to work with RDF and other semantic data formats. It provides a rich set of parsers and serializers for RDF/XML, N3, NTriples, N-Quads, Turtle, RDFa and Mircodata. Apart from the parsers, it provides a Graph interface which allows us to store the relational data in a graph, keeping the semantic structure of the data. RDFLib also provides SPARQL implementation. SPARQL (SPARQL Protocol and RDF Query Language) is a query language for RDF datastores. 
 
 RDFLib facilitates adding plugins for parsers, serializers, data stores and to handle query results. We are currently using the OWL ontology to detect the relationships between various classes. RDFLib supports the parsing of OWL ontologies using the OWL-RL package developed on top of it.
+
+\section{Related Work}
+
