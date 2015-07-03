@@ -2,13 +2,12 @@
 \pagestyle{empty}
 
 \begin{center}
-\vspace{0.1in}
-\large{\bf ABSTRACT} \par  
-\bigskip \bigskip
+%\vspace{0.1in}
+\large{\bf ABSTRACT} \par 
 \end{center}
 
-{\bf Title of Thesis:} \parbox[t]{4.5in}{{Automatic Interpretation of Log Files\\
-Piyush Nimbalkar, MS Computer Science, 2015\\}}
+{\bf Title of Thesis:} \parbox[t]{4.5in}{{Semantic Interpretation of Structured Log Files\\
+Piyush Nimbalkar, MS Computer Science, 2015}}
 \begin{singlespace}
 {\bf Thesis Directed by:}{\hspace{2.5mm}} \parbox[t]{3in}{Dr. Anupam Joshi, Professor\\
 Department of Computer Science\\ 
@@ -17,7 +16,7 @@ and Electrical Engineering\\}
 
 Log files comprise of different events happening in various applications, operating systems and even in network devices. Originally they were used to record information for diagnostic and debugging purposes. Nowadays, logs are also used to track events which can be used in auditing and forensics in case of malicious activities or systems attacks. Various softwares like intrusion detection systems, webservers, anti-virus and anti-malware systems, firewalls and network devices generate logs with useful information, that can be used to protect against such system attacks. Analyzing log files can help in pro-actively avoiding attacks against the systems. While there are existing tools that do a good job when the format of log files is known, the challenge lies in cases where log files are from unknown devices and of unknown formats.
 
-In this work, we are addressing this particular problem. We propose a framework that takes any log file and automatically gives out a semantic interpretation as a set of RDF Linked Data triples. The framework splits the log files into columns using regular expression-based or dictionary-based classifiers. Leveraging and modifying our existing work on inferring the semantics of tables, we identify and map every "column" from a log file and map it to concepts either from a general purpose KB like DBpedia or domain specific ontologies such as IDS. We also identify relationships between various "columns" in such log files. Converting large and verbose log files into such semantic representations will help in better search, integration and rich reasoning over the data.
+We propose a framework that takes any log file and automatically gives out a semantic interpretation as a set of RDF Linked Data triples. The framework splits a log file into columns using regular expression-based or dictionary-based classifiers. Leveraging and modifying our existing work on inferring the semantics of tables, we identify and map every column from a log file and map it to concepts either from a general purpose KB like DBpedia or domain specific ontologies such as IDS. We also identify relationships between various columns in such log files. Converting large and verbose log files into such semantic representations will help in better search, integration and rich reasoning over the data.
 
 \par\vfil
 
