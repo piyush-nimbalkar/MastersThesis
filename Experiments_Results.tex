@@ -2,7 +2,7 @@
 \thispagestyle{plain}
 \label {Experiments and Results}
 
-In this chapter we discuss the datasets used and the experiment setup to test the column separation, column annotations and relation predictions. We also evaluate the framework as we explain the results from the various experiments performed on the datasets.
+In this chapter we discuss the datasets used and the experimental setup to test the column separation, column annotations and relation predictions. We also evaluate the framework as we explain the results from the various experiments performed on the datasets.
 
 
 \section{Data Setup}
@@ -49,7 +49,7 @@ In this experiment we tested the precision with which the log files are converte
 	\label{fig:tabulate_precision_recall_1}
 \end{figure}
 
-As discussed in previous chapter, we separate the log files using standard delimiters. Due to this, columns with multiple words but no surrounding characters, get separated as multiple columns in our framework. It is observed, that in most of the cases such descriptive columns with multiple words are found at the tail of the log entry. Thus, most of the initial columns are easily separated. Due to the said fact about log files, our framework can give out more columns than the expected number of columns. We gets a high recall as we do not expect those columns to be separated. While the recall is high, we observe a low precision. Due to the extraneous columns, which are not there in the original log files, we get a low precision compared to the recall. In Figure~\ref{fig:tabulate_precision_recall_1} we see that for both the datasets, we get a high recall and low precision.
+As discussed in previous chapter, we separate the log files using standard delimiters. Due to this, columns with multiple words but no surrounding characters, get separated as multiple columns in our framework. It is observed, that in most of the cases such descriptive columns with multiple words are found at the tail of the log entry. Thus, most of the initial columns are easily separated. Due to the said fact about log files, our framework can give out more columns than the expected number of columns. We get a high recall as we do not expect those columns to be separated. While the recall is high, we observe a low precision. Due to the extraneous columns, which are not there in the original log files, we get a low precision compared to the recall. In Figure~\ref{fig:tabulate_precision_recall_1} we see that for both the datasets, we get a high recall and low precision.
 
 \begin{figure}[h]
 	\centering
